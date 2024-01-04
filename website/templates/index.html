@@ -1,0 +1,58 @@
+<!-- templates/calculator.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <div class="calculator">
+        <h1>Simple Calculator</h1>
+        <form method="post" action="/calculate">
+            <label for="num1">Number 1:</label>
+            <input type="text" name="num1" required>
+            <label for="num2">Number 2:</label>
+            <input type="text" name="num2" required>
+            <label for="operation">Operation:</label>
+            <select name="operation" required>
+                <option value="add">Add</option>
+                <option value="subtract">Subtract</option>
+            </select>
+
+            <div class="calculator-buttons-container">
+                <button type="button" onclick="appendToInput('1')">1</button>
+                <button type="button" onclick="appendToInput('2')">2</button>
+                <button type="button" onclick="appendToInput('3')">3</button>
+                <button type="button" onclick="appendToInput('4')">4</button>
+                <button type="button" onclick="appendToInput('5')">5</button>
+                <button type="button" onclick="appendToInput('6')">6</button>
+                <button type="button" onclick="appendToInput('7')">7</button>
+                <button type="button" onclick="appendToInput('8')">8</button>
+                <button type="button" onclick="appendToInput('9')">9</button>
+                <button type="button" onclick="appendToInput('0')">0</button>
+                <button type="button" onclick="appendToInput('#')">#</button>
+                <button type="button" onclick="appendToInput('*')">*</button>
+            </div>
+            <input type="submit" value="Calculate">
+        </form>
+
+        {% if result is defined %}
+        <h2>Result: {{ result }}</h2>
+        {% endif %}
+    </div>
+
+    <script>
+        function appendToInput(value) {
+            var numInput = document.activeElement;
+            if (numInput.tagName === 'INPUT' && numInput.type === 'text') {
+                numInput.value += value;
+            }
+        }
+    </script>
+</body>
+
+</html>

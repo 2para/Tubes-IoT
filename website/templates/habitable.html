@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habitable Checker</title>
+    <!-- You can link your CSS stylesheets here if needed -->
+</head>
+
+<body>
+    <h1>Habitable Room Checker</h1>
+    <form action="/predict" method="post">
+        <label for="suhu">Status of the room:</label>
+        <input type="text" id="status" name="suhu" disabled>
+    </form>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.3/socket.io.js"></script>
+<script>
+    var socket = io.connect('http://' + document.domain + ':' + location.port);
+    socket.on('tempthumid', function (data) {
+        document.getElementById('status').value = data.Status;
+    });
+</script>
+
+</html>
